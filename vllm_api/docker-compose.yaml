@@ -1,0 +1,29 @@
+services:
+  vllm:
+    image: vllm/vllm-openai:latest
+    container_name: vllm
+    entrypoint: ["/bin/bash", "/app/entrypoint.sh"]
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    volumes:
+      - ~/.cache/huggingface:/root/.cache/huggingface
+      - ~/.cache/vllm:/root/.cache/vllm
+      - ./entrypoint.sh:/app/entrypoint.sh
+      - ./adapters.sh:/app/adapters.sh
+    networks:
+      - aio-network
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://localhost:3100/loki/api/v1/push"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu] 
+
+networks:
+  aio-network:
+    external: true

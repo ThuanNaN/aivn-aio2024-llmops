@@ -1,0 +1,39 @@
+services:
+  openwebui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    volumes:
+      - open-webui:/app/backend/data
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://localhost:3100/loki/api/v1/push"
+    networks:
+      - aio-network
+  
+  gradio-app:
+    build: .
+    container_name: gradio-app
+    restart: unless-stopped
+    ports:
+      - "7860:7860"
+    env_file:
+      - .env
+    networks:
+      - aio-network
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://localhost:3100/loki/api/v1/push"
+
+volumes:
+  open-webui:
+
+networks:
+  aio-network:
+    external: true
