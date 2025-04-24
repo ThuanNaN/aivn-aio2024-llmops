@@ -1,9 +1,8 @@
-from langchain_openai import OpenAI, ChatOpenAI
+from langchain_openai import ChatOpenAI
 from app.core.config import get_settings
 
 settings = get_settings()
 
-# call /v1/chat/completions
 sentiment_chat_llm = ChatOpenAI(
     openai_api_key=settings.api_key,
     openai_api_base=settings.api_base,
@@ -13,8 +12,7 @@ sentiment_chat_llm = ChatOpenAI(
 )
 
 
-# call /v1/completions
-medqa_chat_llm = OpenAI(
+medqa_chat_llm = ChatOpenAI(
     openai_api_key=settings.api_key,
     openai_api_base=settings.api_base,
     model="medqa-lora",
