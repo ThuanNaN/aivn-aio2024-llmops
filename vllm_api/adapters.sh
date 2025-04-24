@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Preload/validate paths
-MED_QA_LORA_DIR="/root/.cache/huggingface/hub/models--thuanan--med-mcqa-llama-3.2-1B-Instruct-4bit-lora/snapshots/90e2a7c4a8d782e4e75207756acfba98cfb236aa"
+MED_QA_LORA_DIR="/root/.cache/huggingface/hub/models--thuanan--med-mcqa-llama-3.2-1B-Instruct-4bit-lora/snapshots/f211dff2cd67765206902672f51fb683854801e8"
 VSF_LORA_DIR="/root/.cache/huggingface/hub/models--thuanan--Llama-3.2-1B-Instruct-lora-vsf/snapshots/a4ecdb44c2d665ad5a2cfcbc6f005f3e2e3646cc"
 
 # Curl command to load lora adaptors
