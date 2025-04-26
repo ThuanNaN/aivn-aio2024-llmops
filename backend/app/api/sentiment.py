@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from app.models.sentiment import SentimentRequest, SentimentResponse
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
@@ -23,7 +23,14 @@ def analyze_sentiment(request: SentimentRequest):
     prompt = PromptTemplate(template=SENTIMENT_TEMPLATE, input_variables=["input"])
 
     chain = prompt | sentiment_chat_llm | SentimentOutputParser()
-
-    result = chain.invoke({"input": request.text})
+    
+    input = {
+        "input": request.text
+    }
+    if request.text == "Error":
+        input = {
+            "inputs": request.text # Wrong keys to test error alerting
+        }
+    result = chain.invoke(input)
 
     return SentimentResponse(content=result)
