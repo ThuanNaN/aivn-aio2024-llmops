@@ -119,6 +119,11 @@ with gr.Blocks() as sentiment_tab:
         [
             ["Thầy rất nhiệt tình và dễ thương."],
             ["Mọi thứ rất dễ hiểu."],
+            ["Slide rất khó hiểu."],
+            ["Thầy rất dễ thương."],
+            ["Thầy rất dễ thương và nhiệt tình."],
+            ["Thầy rất khó hiểu và không nhiệt tình."],
+            ["Slide được cập nhật."],
         ],
         inputs=[text_input],
         outputs=[sentiment_output],
