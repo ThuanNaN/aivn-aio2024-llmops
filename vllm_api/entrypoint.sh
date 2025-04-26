@@ -15,7 +15,10 @@ $PYTHON_CMD -m vllm.entrypoints.openai.api_server \
   --model meta-llama/Llama-3.2-1B-Instruct \
   --port 8000 \
   --quantization bitsandbytes \
+  --enable-prefix-caching \
+  --swap-space 16 \
   --gpu-memory-utilization 0.9 \
+  --disable-log-requests \
   --max-model-len 4096 \
   --enable-lora &
 
