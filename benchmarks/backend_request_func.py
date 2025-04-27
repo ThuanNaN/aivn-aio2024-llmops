@@ -34,6 +34,7 @@ class RequestFuncInput:
     multi_modal_content: Optional[dict] = None
     ignore_eos: bool = False
     language: Optional[str] = None
+    api_key: Optional[str] = None
 
 
 @dataclass
@@ -271,8 +272,11 @@ async def async_request_openai_completions(
             payload["ignore_eos"] = request_func_input.ignore_eos
         if request_func_input.extra_body:
             payload.update(request_func_input.extra_body)
+        
+        # Use provided API key or fall back to environment variable
+        api_key = request_func_input.api_key or os.environ.get('OPENAI_API_KEY')
         headers = {
-            "Authorization": f"Bearer {os.environ.get('OPENAI_API_KEY')}"
+            "Authorization": f"Bearer {api_key}"
         }
 
         output = RequestFuncOutput()
@@ -376,9 +380,12 @@ async def async_request_openai_chat_completions(
             payload["ignore_eos"] = request_func_input.ignore_eos
         if request_func_input.extra_body:
             payload.update(request_func_input.extra_body)
+        
+        # Use provided API key or fall back to environment variable
+        api_key = request_func_input.api_key or os.environ.get('OPENAI_API_KEY')
         headers = {
             "Content-Type": "application/json",
-            "Authorization": f"Bearer {os.environ.get('OPENAI_API_KEY')}",
+            "Authorization": f"Bearer {api_key}",
         }
 
         output = RequestFuncOutput()
@@ -466,8 +473,11 @@ async def async_request_openai_audio(
         }
         if request_func_input.extra_body:
             payload.update(request_func_input.extra_body)
+        
+        # Use provided API key or fall back to environment variable
+        api_key = request_func_input.api_key or os.environ.get('OPENAI_API_KEY')
         headers = {
-            "Authorization": f"Bearer {os.environ.get('OPENAI_API_KEY')}",
+            "Authorization": f"Bearer {api_key}",
         }
 
         # Send audio file
