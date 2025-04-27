@@ -62,9 +62,16 @@ This project demonstrates an end-to-end LLM deployment with a focus on:
 
 ## Accessing Services
 
-- **Gradio UI**: `http://localhost:7860`
+- **vLLM API**: `http://localhost:8000`
+- **Backend API**: `http://localhost:8001`
+- **Gradio UI**: `http://localhost:7861`
 - **Open WebUI**: `http://localhost:8080`
 - **Grafana**: `http://localhost:3000`
 - **Prometheus**: `http://localhost:9090`
 
-## Project Structure
+## Benchmark
+
+```bash
+export OPENAI_API_KEY=<your vllm api key>
+make bench_serving
+```
